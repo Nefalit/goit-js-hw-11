@@ -1,11 +1,12 @@
 {{#each this}}
     <div class='photo-card'>
-      <a class="gallery__link" href={{this.largeImageURL}}>
+      <a class="gallery-link" href={{this.largeImageURL}}>
       <img
+      class="gallery-img"
         src={{this.webformatURL}}
         alt={{this.tags}}
         loading='lazy'
-        width='330'
+        {{!-- width='330' --}}
       />
       </a>
       <div class='info'>

@@ -21,13 +21,25 @@ let lightbox = null;
 formEl.addEventListener('submit', findImg);
 loadBtnEl.addEventListener('click', loadMoreImg);
 
+const mutationObserver = new MutationObserver(mutation => {
+  mutation.forEach(el => {
+    const mutationEl = [...el.addedNodes].filter(el => el.nodeName !== '#text');
+    setTimeout(() => {
+      mutationEl.forEach(el => {
+        el.classList.add('appear');
+      });
+    }, 0);
+  });
+});
+mutationObserver.observe(galleryEl, { childList: true });
+
 function findImg(ev) {
   ev.preventDefault();
   page = 1;
   galleryEl.innerHTML = '';
   count += 40;
   query = ev.currentTarget.elements['searchQuery'].value.trim();
-  
+
   imageRequest(query, page)
     .then(data => {
       if (!data.hits.length) {
@@ -43,12 +55,19 @@ function findImg(ev) {
         `${emojiOk} Hooray!We found ${data.totalHits} images.`
       );
       render(data, page);
+      // const galleryAllEl = galleryEl.querySelectorAll('.photo-card');
+      // setTimeout(() => {
+      //   galleryAllEl.forEach(el => {
+      //     el.classList.add('appear');
+      //   });
+      // }, 0);
+
       lightbox = new SimpleLightbox('.gallery a', {
         overlay: true,
         captionsData: 'alt',
         captionDelay: 250,
         fadeSpeed: 500,
-        scaleImageToRatio:true,
+        scaleImageToRatio: true,
       });
       loadBtnEl.classList.remove('is-hidden');
     })
@@ -88,4 +107,10 @@ function render(data, page) {
   } else {
     galleryEl.innerHTML = resultForHbs;
   }
+  // const galleryAllEl = galleryEl.querySelectorAll('.photo-card');
+  // setTimeout(() => {
+  //   galleryAllEl.forEach(el => {
+  //     el.classList.add('appear');
+  //   });
+  // }, 0);
 }
