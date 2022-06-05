@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
 import card from '../templates/gallery-card.hbs';
-import { imageRequest } from '../js/api.js';
+import { imageRequest } from './api.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
