@@ -36,8 +36,10 @@ mutationObserver.observe(galleryEl, { childList: true });
 function findImg(ev) {
   ev.preventDefault();
   page = 1;
+  count = 0;
   galleryEl.innerHTML = '';
   count += 40;
+  console.log(count);
   query = ev.currentTarget.elements['searchQuery'].value.trim();
   imageRequest(query, page)
     .then(({ data }) => {
