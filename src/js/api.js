@@ -3,15 +3,15 @@ const ROOT_URL = 'https://pixabay.com/api/';
 const axios = require('axios');
 
 export const imageRequest = async (query, page) => {
-  const params = new URLSearchParams({
-    key: API,
-    q: query,
-    image_type: 'photo',
-    orientation: 'horizontal',
-    safesearch: true,
-    per_page: 40,
-    page: page,
-  });
+  // const params = new URLSearchParams({
+  //   key: API,
+  //   q: query,
+  //   image_type: 'photo',
+  //   orientation: 'horizontal',
+  //   safesearch: true,
+  //   per_page: 40,
+  //   page: page,
+  // });
 
   // return fetch(`${ROOT_URL}?${params}`).then(response => {
   //     if (!response.ok) {
@@ -19,5 +19,15 @@ export const imageRequest = async (query, page) => {
   //       }
   //   return response.json();
   // });
-  return (await axios.get(`${ROOT_URL}?${params}`)).data;
+  return await axios.get(`${ROOT_URL}`, {
+    params: {
+      key: API,
+      q: query,
+      image_type: 'photo',
+      orientation: 'horizontal',
+      safesearch: true,
+      per_page: 40,
+      page: page,
+    },
+  });
 };

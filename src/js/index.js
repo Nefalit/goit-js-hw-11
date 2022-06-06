@@ -41,7 +41,7 @@ function findImg(ev) {
   query = ev.currentTarget.elements['searchQuery'].value.trim();
 
   imageRequest(query, page)
-    .then(data => {
+    .then(({ data }) => {
       if (!data.hits.length) {
         inputEl.value = '';
         Notiflix.Notify.failure(
