@@ -19,7 +19,7 @@ export const imageRequest = async (query, page) => {
   //       }
   //   return response.json();
   // });
-  return await axios.get(`${ROOT_URL}`, {
+  return await axios.get(`${ROOT_URL}?`, {
     params: {
       key: API,
       q: query,

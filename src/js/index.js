@@ -39,7 +39,6 @@ function findImg(ev) {
   galleryEl.innerHTML = '';
   count += 40;
   query = ev.currentTarget.elements['searchQuery'].value.trim();
-
   imageRequest(query, page)
     .then(({ data }) => {
       if (!data.hits.length) {
@@ -79,9 +78,9 @@ function findImg(ev) {
 
 function loadMoreImg(ev) {
   page += 1;
-  count + 40;
+  count += 40;
   imageRequest(query, page)
-    .then(data => {
+    .then(({ data }) => {
       if (count > data.totalHits) {
         inputEl.value = '';
         count = 0;
