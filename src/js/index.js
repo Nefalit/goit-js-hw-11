@@ -35,11 +35,13 @@ mutationObserver.observe(galleryEl, { childList: true });
 
 function findImg(ev) {
   ev.preventDefault();
+  loadBtnEl.classList.add('is-hidden');
   page = 1;
   count = 0;
   galleryEl.innerHTML = '';
   count += 40;
   query = ev.currentTarget.elements['searchQuery'].value.trim();
+
   imageRequest(query, page)
     .then(({ data }) => {
       if (!data.hits.length) {
@@ -82,7 +84,7 @@ function loadMoreImg(ev) {
   count += 40;
   imageRequest(query, page)
     .then(({ data }) => {
-      if (count > data.totalHits) {
+      if (count-39 > data.totalHits) {
         inputEl.value = '';
         count = 0;
         Notiflix.Notify.failure(
