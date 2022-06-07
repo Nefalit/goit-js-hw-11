@@ -71,7 +71,12 @@ function findImg(ev) {
         fadeSpeed: 500,
         scaleImageToRatio: true,
       });
-      loadBtnEl.classList.remove('is-hidden');
+      if (data.hits.length < 40) {
+        loadBtnEl.classList.add('is-hidden');
+      } else {
+        loadBtnEl.classList.remove('is-hidden');
+      }
+      // loadBtnEl.classList.remove('is-hidden');
     })
     .catch(err => {
       galleryEl.innerHTML = '';
@@ -84,7 +89,7 @@ function loadMoreImg(ev) {
   count += 40;
   imageRequest(query, page)
     .then(({ data }) => {
-      if (count-39 > data.totalHits) {
+      if (count - 39 > data.totalHits) {
         inputEl.value = '';
         count = 0;
         Notiflix.Notify.failure(
@@ -95,6 +100,11 @@ function loadMoreImg(ev) {
       }
       render(data, page);
       lightbox.refresh();
+      if (data.hits.length < 40) {
+        loadBtnEl.classList.add('is-hidden');
+      } else {
+        loadBtnEl.classList.remove('is-hidden');
+      }
     })
     .catch(err => {
       galleryEl.innerHTML = '';
