@@ -102,6 +102,9 @@ function loadMoreImg(ev) {
       lightbox.refresh();
       if (data.hits.length < 40) {
         loadBtnEl.classList.add('is-hidden');
+        Notiflix.Notify.failure(
+          `${emojiFail} Sorry, there are no images matching your search query. Please try again.`
+        );
       } else {
         loadBtnEl.classList.remove('is-hidden');
       }
